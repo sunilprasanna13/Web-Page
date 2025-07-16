@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Football Arena 2025</title>
+  <style>
+    /* CSS Variables for colors */
+    :root {
+      --lime-green: #a8e10c;
+      --dark-teal: #264653;
+      --blue: #00bfff;
+      --coral: #ff7f50;
+      --gold: #ffd700;
+      --bg-black-trans: rgba(0, 0, 0, 0.6);
+      --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    /* Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-family);
+      background: url('rugby-sport-environment-filed_23-2151891713.avif') no-repeat center center/cover;
+      min-height: 100vh;
+      color: #d3d3d3;
+      line-height: 1.6;
+      padding: 0 20px 40px;
+      overflow-x: hidden;
+    }
+
+    /* Hero Banner */
+    .hero {
+      position: relative;
+      height: 320px;
+      background: url('rugby-sport-environment-filed_23-2151891713.avif') center center/cover no-repeat;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      color: var(--lime-green);
+      text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+      margin-bottom: 40px;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 1;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 800px;
+      padding: 0 20px;
+    }
+
+    .hero-content h1 {
+      font-size: 3.5rem;
+      margin-bottom: 10px;
+      font-weight: 900;
+      letter-spacing: 3px;
+    }
+
+    .hero-content p {
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+      font-weight: 600;
+    }
+
+    .hero-content button {
+      background-color: var(--lime-green);
+      border: none;
+      padding: 15px 30px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      color: #222;
+      border-radius: 30px;
+      cursor: pointer;
+      box-shadow: 0 5px 15px rgba(168, 225, 12, 0.6);
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .hero-content button:hover {
+      background-color: var(--coral);
+      transform: scale(1.05);
+      color: white;
+      box-shadow: 0 8px 20px rgba(255, 127, 80, 0.7);
+    }
+
+    /* Header */
+    header {
+      text-align: center;
+      margin-bottom: 20px;
+      color: var(--lime-green);
+      text-shadow: 1px 1px 4px rgba(0,0,0,0.7);
+    }
+
+    header h1 {
+      font-size: 2.8rem;
+      margin-bottom: 10px;
+      letter-spacing: 2px;
+    }
+
+    header p {
+      font-size: 1.3rem;
+      font-weight: 600;
+      letter-spacing: 1.2px;
+    }
+
+    /* Navigation */
+    nav {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    nav ul {
+      list-style: none;
+      display: inline-flex;
+      gap: 30px;
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
+
+    nav ul li a {
+      color: var(--blue);
+      text-decoration: none;
+      position: relative;
+      padding-bottom: 3px;
+      transition: color 0.3s ease;
+    }
+
+    nav ul li a::after {
+      content: "";
+      position: absolute;
+      width: 0%;
+      height: 2px;
+      bottom: 0;
+      left: 0;
+      background-color: var(--coral);
+      transition: width 0.3s ease;
+    }
+
+    nav ul li a:hover {
+      color: var(--coral);
+    }
+
+    nav ul li a:hover::after {
+      width: 100%;
+    }
+
+    /* Section General */
+    section {
+      max-width: 900px;
+      margin: 0 auto 50px;
+      background: var(--bg-black-trans);
+      padding: 30px 40px;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.6);
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeInUp 0.8s forwards;
+    }
+
+    section:nth-of-type(odd) {
+      animation-delay: 0.1s;
+    }
+    section:nth-of-type(even) {
+      animation-delay: 0.3s;
+    }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    section h2 {
+      color: var(--gold);
+      font-size: 2.2rem;
+      margin-bottom: 20px;
+      text-shadow: 1px 1px 4px rgba(0,0,0,0.7);
+    }
+
+    section p, section ul, section table, section dl {
+      font-size: 1.15rem;
+      line-height: 1.7;
+      color: #ddd;
+    }
+
+    /* Teams List styled as cards */
+    .teams ul {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      padding-left: 0;
+      list-style: none;
+      margin-top: 15px;
+    }
+
+    .teams ul li {
+      flex: 1 1 calc(45% - 15px);
+      background: var(--dark-teal);
+      padding: 18px 20px;
+      border-radius: 10px;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.5);
+      color: var(--lime-green);
+      font-weight: 700;
+      cursor: default;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .teams ul li:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 15px rgba(168, 225, 12, 0.7);
+    }
+
+    /* Adding an icon before each team */
+    .teams ul li::before {
+      content: "⚽";
+      font-size: 1.5rem;
+      display: inline-block;
+    }
+
+    /* Toggle Button */
+    button#toggleTeams {
+      margin-bottom: 15px;
+      padding: 10px 22px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      background-color: var(--dark-teal);
+      color: var(--lime-green);
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      box-shadow: 1px 1px 7px rgba(0,0,0,0.8);
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+      display: inline-block;
+    }
+
+    button#toggleTeams:hover {
+      background-color: var(--blue);
+      color: white;
+      box-shadow: 0 0 15px var(--blue);
+    }
+
+    /* Schedule Table */
+    table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      margin-top: 10px;
+      color: #d3d3d3;
+      background-color: transparent;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 0 12px rgba(0,0,0,0.5);
+    }
+
+    th, td {
+      padding: 15px 20px;
+      text-align: left;
+    }
+
+    th {
+      background-color: var(--dark-teal);
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
+
+    tbody tr:nth-child(odd) {
+      background-color: rgba(168, 225, 12, 0.15);
+    }
+
+    tbody tr:nth-child(even) {
+      background-color: rgba(168, 225, 12, 0.08);
+    }
+
+    tbody tr.highlight {
+      background-color: var(--dark-teal) !important;
+      color: var(--lime-green) !important;
+      font-weight: 700;
+      box-shadow: 0 0 12px var(--lime-green);
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 25px 20px;
+      background: #111;
+      color: #d3d3d3;
+      font-weight: 600;
+      letter-spacing: 1px;
+      border-top: 2px solid var(--lime-green);
+      margin-top: 50px;
+      position: relative;
+    }
+
+    /* Footer social icons */
+    .social-icons {
+      margin-top: 10px;
+    }
+
+    .social-icons a {
+      color: var(--lime-green);
+      margin: 0 12px;
+      font-size: 1.5rem;
+      transition: color 0.3s ease;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .social-icons a:hover {
+      color: var(--coral);
+    }
+
+    /* Links style */
+    a {
+      color: var(--blue);
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+
+    a:hover {
+      color: var(--coral);
+      text-decoration: underline;
+    }
+
+  </style>
+</head>
+<body>
+  <!-- Hero Banner -->
+  <section class="hero" aria-label="Welcome to Football Arena 2025">
+    <div class="hero-content">
+      <h1>Football Arena 2025</h1>
+      <p>July 20–25 | Greenfield Stadium</p>
+      <button onclick="document.getElementById('registration').scrollIntoView({behavior:'smooth'})">
+        Register Your Team Now
+      </button>
+    </div>
+  </section>
+
+  <header>
+    <h1>Welcome to the Ultimate Football Tournament</h1>
+    <p>Experience the thrill of top-level football competition.</p>
+  </header>
+
+  <nav aria-label="Primary Navigation">
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#teams">Teams</a></li>
+      <li><a href="#schedule">Schedule</a></li>
+      <li><a href="#registration">Registration</a></li>
+    </ul>
+  </nav>
+
+  <section id="about">
+    <h2>About the Tournament</h2>
+    <p>The Football Arena 2025 brings together 16 elite teams for a week-long football battle. Group stages followed by knockout rounds will decide the champion!</p>
+  </section>
+
+  <section class="teams" id="teams">
+    <h2>Participating Teams</h2>
+    <button id="toggleTeams">Hide Teams</button>
+    <ul>
+      <li>Tirupur Football Academy</li>
+      <li>Sparz FC</li>
+      <li>Palakad Blasters</li>
+      <li>Royal FC</li>
+      <!-- Add more teams -->
+    </ul>
+  </section>
+
+  <section class="schedule" id="schedule">
+    <h2>Match Schedule</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Match</th>
+          <th>Time</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>July 20</td>
+          <td>TFA vs Sparz FC</td>
+          <td>10:00 AM</td>
+        </tr>
+        <tr>
+          <td>July 20</td>
+          <td>Palakad Blasters vs Royal FC</td>
+          <td>12:00 PM</td>
+        </tr>
+        <!-- Add more matches -->
+      </tbody>
+    </table>
+  </section>
+
+  <section id="registration">
+    <h2>Team Registration</h2>
+    <p>To register your team, send an email to <a href="mailto:register@footballarena.com">register@footballarena.com</a> with your team name and contact details.</p>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Football Arena | Contact: info@footballarena.com</p>
+    <div class="social-icons" aria-label="Social Media Links">
+      <a href="#" aria-label="Facebook" title="Facebook">📘</a>
+      <a href="#" aria-label="Twitter" title="Twitter">🐦</a>
+      <a href="#" aria-label="Instagram" title="Instagram">📸</a>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const toggleBtn = document.getElementById("toggleTeams");
+      const teamList = document.querySelector(".teams ul");
+
+      // Initially show teams
+      teamList.style.display = "flex";
+      toggleBtn.textContent = "Hide Teams";
+
+      toggleBtn.addEventListener("click", () => {
+        if (teamList.style.display === "none") {
+          teamList.style.display = "flex";
+          toggleBtn.textContent = "Hide Teams";
+        } else {
+          teamList.style.display = "none";
+          toggleBtn.textContent = "Show Teams";
+        }
+      });
+
+      // Highlight upcoming matches
+      const today = new Date();
+      const rows = document.querySelectorAll(".schedule tbody tr");
+      rows.forEach(row => {
+        const dateText = row.cells[0].innerText + " 2025";
+        const matchDate = new Date(dateText);
+        if (matchDate >= today) {
+          row.classList.add('highlight');
+        }
+      });
+
+      // Smooth scroll for nav links
+      document.querySelectorAll('nav a').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          e.preventDefault();
+          document.querySelector(this.getAttribute('href')).scrollIntoView({
+            behavior: 'smooth'
+          });
+        });
+      });
+
+      // Alert on clicking registration email
+      const emailLink = document.querySelector('a[href^="mailto:"]');
+      emailLink.addEventListener('click', (e) => {
+        alert("Thank you for your interest! Please send your team details to register.");
+      });
+    });
+  </script>
+</body>
+</html>
